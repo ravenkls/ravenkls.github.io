@@ -9,7 +9,7 @@ const router = createHashRouter([
   {
     path: "/",
     element: <Root />,
-    children: [{ path: "chakra-colours", element: <ChakraColourPicker /> }],
+    children: [{ path: "colorscheme", element: <ChakraColourPicker /> }],
   },
 ]);
 
