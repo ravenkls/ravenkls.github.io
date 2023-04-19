@@ -1,6 +1,6 @@
-import { Card, CardBody, useColorModeValue } from "@chakra-ui/react";
+import { Button, Card, CardBody, useColorModeValue } from "@chakra-ui/react";
 import Prism from "prism-react-renderer";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import darkTheme from "prism-react-renderer/themes/oceanicNext";
 import lightTheme from "prism-react-renderer/themes/github";
@@ -11,7 +11,7 @@ type Props = {
 
 const getCode = (colourScheme: Record<number, string>) => {
   const code = `import { extendTheme } from "@chakra-ui/react"
-  
+
 const theme = extendTheme({
   colors: {
     brand: {
@@ -34,10 +34,25 @@ const theme = extendTheme({
 
 function ThemeCode({ colourScheme }: Props) {
   const theme = useColorModeValue(lightTheme, darkTheme);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(getCode(colourScheme));
+    setCopied(true);
+  };
+
+  useEffect(() => {
+    if (copied) {
+      setTimeout(() => setCopied(false), 1000);
+    }
+  }, [copied]);
 
   return (
     <Card>
-      <CardBody>
+      <CardBody pos="relative">
+        <Button size="sm" pos="absolute" top={3} right={3} onClick={handleCopy}>
+          {copied ? "COPIED" : "COPY"}
+        </Button>
         <Highlight
           {...defaultProps}
           code={getCode(colourScheme)}

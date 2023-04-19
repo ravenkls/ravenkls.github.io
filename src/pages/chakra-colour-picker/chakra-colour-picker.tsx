@@ -21,7 +21,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useMemo, useState } from "react";
 import { AddIcon, CheckIcon } from "@chakra-ui/icons";
-import CodeRenderer from "./components/code-renderer";
 import { usePersistedHex } from "./hooks/use-persisted-colour";
 import ChakraDemo from "./components/chakra-demo";
 import { generateThemeColours } from "./util";
